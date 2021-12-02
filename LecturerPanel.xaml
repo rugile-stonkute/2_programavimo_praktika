@@ -1,0 +1,27 @@
+﻿<Window x:Class="_3_praktine.LecturerPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_3_praktine"
+        mc:Ignorable="d"
+        Title="LecturerPanel" Height="450" Width="800">
+    <Grid>
+        <Canvas>
+            <Label Content="Pažymys" Canvas.Left="33" Canvas.Top="235"/>
+            <TextBox x:Name="GradeTextBox" Canvas.Left="93" Canvas.Top="239" TextWrapping="Wrap" Width="120" MaxLength="2" />
+            <Button x:Name="AddGradeButton" Content="Pridėti" Canvas.Left="76" Canvas.Top="294" Width="58" Height="35" Click="AddGradeButton_Click"/>
+            <Button Content="Atžymėti" Canvas.Left="349" Canvas.Top="367" Click="Button_Click_1"/>
+            <Button Content="Išsaugoti" Canvas.Left="173" Canvas.Top="309" Click="Button_Click_2"/>
+        </Canvas>
+
+        <Button x:Name="LogoutButton" Content="Atsijungti" HorizontalAlignment="Left" Margin="712,24,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Label x:Name="UserMetadata" Content="" HorizontalAlignment="Left" Margin="45,34,0,0" VerticalAlignment="Top" Width="200"/>
+        <ComboBox x:Name="SubjectDropdownList" HorizontalAlignment="Left" Margin="31,137,0,0" VerticalAlignment="Top" Width="167" Height="26" SelectionChanged="SubjectDropdownList_SelectionChanged"/>
+        <Label Content="Dalykas" HorizontalAlignment="Left" Margin="31,106,0,0" VerticalAlignment="Top" Width="81"/>
+        <ComboBox x:Name="StudentDropdownList" HorizontalAlignment="Left" Margin="31,199,0,0" VerticalAlignment="Top" Width="167" Height="26"/>
+        <Label Content="Studentas" HorizontalAlignment="Left" Margin="31,168,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="Grades" Margin="354,97,34,81" SelectionChanged="Grades_SelectionChanged" SelectionMode="Single" CanUserAddRows="False" CanUserResizeRows="False" CanUserDeleteRows="False" IsReadOnly="True" CanUserSortColumns="False"/>
+
+    </Grid>
+</Window>

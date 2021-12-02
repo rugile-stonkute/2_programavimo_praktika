@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="AdminPanel.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="LecturerPanel.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Prisijungimas.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="RegisteredUserProfile.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Registracija.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="StudentPanel.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="AdminPanel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="LecturerPanel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Prisijungimas.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="RegisteredUserProfile.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Registracija.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="StudentPanel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

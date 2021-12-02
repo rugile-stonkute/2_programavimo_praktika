@@ -1,0 +1,15 @@
+﻿<Window x:Class="_3_praktine.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_3_praktine"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button x:Name="Registruotis_button" Content="Registruotis" HorizontalAlignment="Left" Margin="253,190,0,0" VerticalAlignment="Top" Click="Registruotis_Button_Click" Height="27" Width="107"/>
+        <Button x:Name="Prisijungti_button" Content="Prisijungti" HorizontalAlignment="Left" Margin="432,190,0,0" VerticalAlignment="Top" Click="Prisijungti_Button_Click" Height="27" Width="107"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-gb" Text="Bonjour :3"/></TextBlock>
+
+    </Grid>
+</Window>
