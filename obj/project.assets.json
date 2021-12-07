@@ -459,11 +459,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rugile\\Desktop\\Praktine_good\\3_praktine\\3_praktine.csproj",
+      "projectUniqueName": "C:\\Users\\Rugile\\Desktop\\Praktine_good\\2_programavimo_praktika\\3_praktine.csproj",
       "projectName": "3_praktine",
-      "projectPath": "C:\\Users\\Rugile\\Desktop\\Praktine_good\\3_praktine\\3_praktine.csproj",
+      "projectPath": "C:\\Users\\Rugile\\Desktop\\Praktine_good\\2_programavimo_praktika\\3_praktine.csproj",
       "packagesPath": "C:\\Users\\Rugile\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rugile\\Desktop\\Praktine_good\\3_praktine\\obj\\",
+      "outputPath": "C:\\Users\\Rugile\\Desktop\\Praktine_good\\2_programavimo_praktika\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Rugile\\AppData\\Roaming\\NuGet\\NuGet.Config",

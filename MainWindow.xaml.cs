@@ -30,11 +30,5 @@ namespace _3_praktine
             this.Hide();
             new Prisijungimas().Show();
         }
-
-        private void Registruotis_Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Hide();
-            new Registracija().Show();
-        }
     }
 }

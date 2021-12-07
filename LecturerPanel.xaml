@@ -10,14 +10,14 @@
         <Canvas>
             <Label Content="Pažymys" Canvas.Left="33" Canvas.Top="235"/>
             <TextBox x:Name="GradeTextBox" Canvas.Left="93" Canvas.Top="239" TextWrapping="Wrap" Width="120" MaxLength="2" />
-            <Button x:Name="AddGradeButton" Content="Pridėti" Canvas.Left="76" Canvas.Top="294" Width="58" Height="35" Click="AddGradeButton_Click"/>
+            <Button x:Name="RemoveGradeButton" Content="Ištrinti" Canvas.Left="76" Canvas.Top="294" Width="58" Height="35" Click="RemoveGradeButton_Click"/>
             <Button Content="Atžymėti" Canvas.Left="349" Canvas.Top="367" Click="Button_Click_1"/>
-            <Button Content="Išsaugoti" Canvas.Left="173" Canvas.Top="309" Click="Button_Click_2"/>
+            <Button Content="Išsaugoti" Canvas.Left="173" Canvas.Top="309" Click="Button_Click_2" RenderTransformOrigin="0.175,-0.347"/>
         </Canvas>
 
         <Button x:Name="LogoutButton" Content="Atsijungti" HorizontalAlignment="Left" Margin="712,24,0,0" VerticalAlignment="Top" Click="Button_Click"/>
         <Label x:Name="UserMetadata" Content="" HorizontalAlignment="Left" Margin="45,34,0,0" VerticalAlignment="Top" Width="200"/>
-        <ComboBox x:Name="SubjectDropdownList" HorizontalAlignment="Left" Margin="31,137,0,0" VerticalAlignment="Top" Width="167" Height="26" SelectionChanged="SubjectDropdownList_SelectionChanged"/>
+        <ComboBox x:Name="SubjectDropdownList" HorizontalAlignment="Left" Margin="31,137,0,0" VerticalAlignment="Top" Width="167" Height="26"/>
         <Label Content="Dalykas" HorizontalAlignment="Left" Margin="31,106,0,0" VerticalAlignment="Top" Width="81"/>
         <ComboBox x:Name="StudentDropdownList" HorizontalAlignment="Left" Margin="31,199,0,0" VerticalAlignment="Top" Width="167" Height="26"/>
         <Label Content="Studentas" HorizontalAlignment="Left" Margin="31,168,0,0" VerticalAlignment="Top"/>

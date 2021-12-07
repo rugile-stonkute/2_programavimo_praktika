@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yu7yCn0kKh0FtamTh4M1cA3/hC324FYXszIYsQnsjuYpimYPf7ARhIrxECWIVW9gl7b+KoA4HKVdwpk4qrtWMw==",
+  "dgSpecHash": "njh85u0EEnJTZUnACvholQrv62m8TL4gA1EAZO8I13dzOmbR6bSZE+xsYIQZ+WvVcIgDIatEr6GP6A9cfde30g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Rugile\\Desktop\\Praktine_good\\3_praktine\\3_praktine.csproj",
+  "projectFilePath": "C:\\Users\\Rugile\\Desktop\\Praktine_good\\2_programavimo_praktika\\3_praktine.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rugile\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Rugile\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

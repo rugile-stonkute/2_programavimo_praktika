@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="Registruotis_button" Content="Registruotis" HorizontalAlignment="Left" Margin="253,190,0,0" VerticalAlignment="Top" Click="Registruotis_Button_Click" Height="27" Width="107"/>
         <Button x:Name="Prisijungti_button" Content="Prisijungti" HorizontalAlignment="Left" Margin="432,190,0,0" VerticalAlignment="Top" Click="Prisijungti_Button_Click" Height="27" Width="107"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-gb" Text="Bonjour :3"/></TextBlock>
 

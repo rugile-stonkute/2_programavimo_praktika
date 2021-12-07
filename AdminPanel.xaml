@@ -5,23 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_3_praktine"
         mc:Ignorable="d"
-        Title="AdminPanel" Height="450" Width="800">
+        Title="AdminPanel" Height="544" Width="800">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="45,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="lt-lt" Text="Įvesti naują slaptažodį:"/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="25,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="lt-lt" Text="Pakartoti naują slaptažodį:"/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="45,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Įvesti "/><Run Language="lt-lt" Text="seną"/><Run Text=" slaptažodį:"/></TextBlock>
-        <Button x:Name="AdminPasswordChangeButton" Content="Keisti slaptažodį" HorizontalAlignment="Left" Margin="184,170,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="AdminPasswordChangeButton_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="168,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold"><Run Language="lt-lt" Text="Slaptažodžio keitimas"/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="45,241,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-gb" Text="Profilio nuotraukos keitimas"/></TextBlock>
-        <ListBox x:Name="RegisteredUsersListBox" Margin="419,69,42,87"/>
-        <TextBlock HorizontalAlignment="Left" Margin="507,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold"><Run Language="en-gb" Text="Registruot"/><Run Language="lt-lt" Text="ų naudotojų sąrašas"/></TextBlock>
-        <Button x:Name="AdminDeleteUserButton" Content="Trinti naudotojus" HorizontalAlignment="Left" Margin="648,369,0,0" VerticalAlignment="Top" Background="#FFEA2525" Height="34" Width="110" FontWeight="Bold" Click="AdminDeleteUserButton_Click"/>
-        <Button x:Name="AdminChangePictureButton" Content="Keisti nuotrauką" HorizontalAlignment="Left" Margin="256,278,0,0" VerticalAlignment="Top" Height="31" Width="102" Click="AdminChangePictureButton_Click"/>
-        <Button x:Name="AdminDeletePictureButton" Content="Trinti nuotrauką" HorizontalAlignment="Left" Margin="256,327,0,0" VerticalAlignment="Top" Background="#FFEA2525" FontWeight="Bold" Height="34" Width="102" Click="AdminDeletePictureButton_Click"/>
-        <PasswordBox x:Name="UserOldPasswordCheckTextBox" HorizontalAlignment="Left" Margin="170,66,0,0" VerticalAlignment="Top" Width="120"/>
-        <PasswordBox x:Name="UserNewPasswordCheckTextBox" HorizontalAlignment="Left" Margin="170,128,0,0" VerticalAlignment="Top" Width="120"/>
-        <PasswordBox x:Name="UserNewPasswordTextBox" HorizontalAlignment="Left" Margin="171,98,0,0" VerticalAlignment="Top" Width="120"/>
-        <Image x:Name="UserPictureImageBox" HorizontalAlignment="Left" Height="100" Margin="45,278,0,0" VerticalAlignment="Top" Width="100"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="99*"/>
+            <ColumnDefinition Width="301*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="LogoutButton" Content="Atsijungti" HorizontalAlignment="Left" Margin="514,24,0,0" VerticalAlignment="Top" Click="Button_Click" Grid.Column="1"/>
+        <Label x:Name="UserMetadata" Content="" HorizontalAlignment="Left" Margin="292,21,0,0" VerticalAlignment="Top" Width="200" Grid.Column="1"/>
+        <Label Content="_________________________________________________________________" HorizontalAlignment="Left" Margin="192,270,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="439" Grid.ColumnSpan="2">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <DataGrid x:Name="Subjects" Margin="265,298,61,10" SelectionChanged="Subjects_SelectionChanged" SelectionMode="Single" CanUserAddRows="False" CanUserResizeRows="False" CanUserDeleteRows="False" IsReadOnly="True" CanUserSortColumns="False" Grid.Column="1"/>
+        <DataGrid x:Name="Users" Margin="66,298,458,18" SelectionChanged="Users_SelectionChanged" SelectionMode="Single" CanUserAddRows="False" CanUserResizeRows="False" CanUserDeleteRows="False" IsReadOnly="True" CanUserSortColumns="False" Grid.ColumnSpan="2"/>
+        <Label Content="Naudotojo vardas" HorizontalAlignment="Left" Margin="66,110,0,0" VerticalAlignment="Top" Width="138" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="UsernameTextBox" TextWrapping="Wrap" MaxLength="2" Margin="66,141,12,369" />
+        <Label Content="Naudotojo pavardė" HorizontalAlignment="Left" Margin="66,174,0,0" VerticalAlignment="Top" Width="138" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="LastnameTextBox" TextWrapping="Wrap" MaxLength="2" Margin="66,205,12,305" />
+        <CheckBox x:Name="IsLecturerCheckBox" Content="Dėstytojas" HorizontalAlignment="Left" Margin="66,249,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <Button x:Name="UnselectUserButton" Content="Atžymėti" Click="Button_Click_1" Margin="151,367,400,141" Grid.Column="1"/>
+        <Button x:Name="RemoveUserButton" Content="Ištrinti" Click="RemoveUserButton_Click" Margin="163,257,579,236" Grid.ColumnSpan="2"/>
+        <Button x:Name="SaveUserButton" Content="Išsaugoti" Click="Button_Click_2" RenderTransformOrigin="0.175,-0.347" Margin="43,270,508,238" Grid.Column="1"/>
+        <Label Content="Grupė" HorizontalAlignment="Left" Margin="34,143,0,0" VerticalAlignment="Top" Width="138" Grid.Column="1"/>
+        <TextBox x:Name="GroupTextBox" TextWrapping="Wrap" MaxLength="2" Margin="34,174,448,336" Grid.Column="1" />
+        <Label Content="Grupė" HorizontalAlignment="Left" Margin="241,84,0,0" VerticalAlignment="Top" Width="81" Grid.Column="1"/>
+        <ComboBox x:Name="GroupDropdownList" HorizontalAlignment="Left" Margin="241,117,0,0" VerticalAlignment="Top" Width="167" Height="26" Grid.Column="1"/>
+        <Label Content="Dėstytojas" HorizontalAlignment="Left" Margin="241,156,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <ComboBox x:Name="LecturerDropdownList" HorizontalAlignment="Left" Margin="241,187,0,0" VerticalAlignment="Top" Width="167" Height="26" Grid.Column="1"/>
+        <Label Content="Dalykas" Margin="241,220,306,282" Grid.Column="1"/>
+        <TextBox x:Name="SubjectTextBox" TextWrapping="Wrap" MaxLength="2" Margin="241,249,241,261" Grid.Column="1" />
+        <Button x:Name="RemoveSubjectButton" Content="Ištrinti" Click="RemoveSubjectButton_Click" Margin="392,252,152,241" Grid.Column="1"/>
+        <Button x:Name="SaveSubjectButton" Content="Išsaugoti" Click="SaveButton_Click_2" RenderTransformOrigin="0.175,-0.347" Margin="490,270,61,238" Grid.Column="1"/>
+        <Button x:Name="UnselectSubjectButton" Content="Atžymėti" Click="UnselectButton_Click_1" Margin="546,357,5,151" Grid.Column="1"/>
 
     </Grid>
 </Window>
