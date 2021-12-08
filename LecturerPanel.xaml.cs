@@ -102,6 +102,8 @@ namespace _3_praktine
 
         private void FillSubjectDropdownList()
         {
+            subjectList.Clear();
+            SubjectDropdownList.Items.Clear();
 
             SqlConnection conn = new SqlConnection(@"Server=.;Database=Praktika_moodle;Trusted_Connection=True;");
             conn.Open();
@@ -130,6 +132,9 @@ namespace _3_praktine
 
         private void FillStudentDropdownList()
         {
+            studentList.Clear();
+            StudentDropdownList.Items.Clear();
+
             SqlConnection conn = new SqlConnection(@"Server=.;Database=Praktika_moodle;Trusted_Connection=True;");
             conn.Open();
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -69,7 +70,6 @@ namespace _3_praktine
             SqlConnection conn = new SqlConnection(@"Server=.;Database=Praktika_moodle;Trusted_Connection=True;");
             conn.Open();
 
-            //Reikia query
             string query = "exec GetAllUsers";
 
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -81,7 +81,7 @@ namespace _3_praktine
                 row["Id"] = reader[0].ToString();
                 row["Vardas"] = reader[1].ToString();
                 row["Pavardė"] = reader[2].ToString();
-                row["Ar Dėstytojas"] = reader[3].ToString();
+                row["Ar Dėstytojas"] = reader[3].ToString() == "1" ? "Taip" : "Ne";
                 row["Grupė"] = reader[4].ToString();
 
                 userDataTable.Rows.Add(row);
@@ -99,7 +99,6 @@ namespace _3_praktine
             SqlConnection conn = new SqlConnection(@"Server=.;Database=Praktika_moodle;Trusted_Connection=True;");
             conn.Open();
 
-            //Reikia query
             string query = "exec GetAllSubjects";
 
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -109,9 +108,9 @@ namespace _3_praktine
             {
                 var row = subjectDataTable.NewRow();
                 row["Id"] = reader[0].ToString();
-                row["Dėstytojas"] = reader[1].ToString();
-                row["Dalykas"] = reader[2].ToString();
-                row["Grupė"] = reader[3].ToString();
+                row["Dėstytojas"] = reader[1].ToString() + " " + reader[2].ToString();
+                row["Dalykas"] = reader[3].ToString();
+                row["Grupė"] = reader[4].ToString();
 
                 subjectDataTable.Rows.Add(row);
             }
@@ -124,6 +123,8 @@ namespace _3_praktine
 
         private void FillGroupDropdownList()
         {
+            groupList.Clear();
+            GroupDropdownList.Items.Clear();
 
             SqlConnection conn = new SqlConnection(@"Server=.;Database=Praktika_moodle;Trusted_Connection=True;");
             conn.Open();
@@ -153,10 +154,11 @@ namespace _3_praktine
         private void FillLecturerDropdownList()
         {
             lecturerList.Clear();
+            LecturerDropdownList.Items.Clear();
+
             SqlConnection conn = new SqlConnection(@"Server=.;Database=Praktika_moodle;Trusted_Connection=True;");
             conn.Open();
 
-            //Reikia query
             string query = "exec GetAllLecturers";
 
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -169,10 +171,10 @@ namespace _3_praktine
                     new Map()
                     {
                         Id = Convert.ToInt32(reader[0].ToString()),
-                        Name = reader[1].ToString()
+                        Name = reader[1].ToString() + " " + reader[2].ToString()
                     });
 
-                LecturerDropdownList.Items.Add(reader[1].ToString());
+                LecturerDropdownList.Items.Add(reader[1].ToString() + " " + reader[2].ToString());
             }
 
             reader.Close();
@@ -200,7 +202,18 @@ namespace _3_praktine
 
                 UsernameTextBox.Text = userDataTable.Rows[Users.SelectedIndex][1].ToString();
                 LastnameTextBox.Text = userDataTable.Rows[Users.SelectedIndex][2].ToString();
-                IsLecturerCheckBox.IsChecked = userDataTable.Rows[Users.SelectedIndex][3].ToString() == "true";
+                IsLecturerCheckBox.IsChecked = userDataTable.Rows[Users.SelectedIndex][3].ToString() == "Taip";
+
+                if (!IsLecturerCheckBox.IsChecked.HasValue || !IsLecturerCheckBox.IsChecked.Value)
+                {
+                    GroupTextBox.IsEnabled = true;
+                }
+                else
+                {
+                    GroupTextBox.Text = "";
+                    GroupTextBox.IsEnabled = false;
+                }
+
                 GroupTextBox.Text = userDataTable.Rows[Users.SelectedIndex][4].ToString();
             }
             else
@@ -215,9 +228,9 @@ namespace _3_praktine
             {
                 RemoveSubjectButton.IsEnabled = true;
 
-                GroupDropdownList.SelectedItem = subjectDataTable.Rows[Subjects.SelectedIndex][1];
-                LecturerDropdownList.SelectedItem = subjectDataTable.Rows[Subjects.SelectedIndex][2];
-                SubjectTextBox.Text = subjectDataTable.Rows[Subjects.SelectedIndex][3].ToString();
+                LecturerDropdownList.SelectedItem = subjectDataTable.Rows[Subjects.SelectedIndex][1];
+                SubjectTextBox.Text = subjectDataTable.Rows[Subjects.SelectedIndex][2].ToString();
+                GroupDropdownList.SelectedItem = subjectDataTable.Rows[Subjects.SelectedIndex][3];
             }
             else
             {
@@ -241,31 +254,44 @@ namespace _3_praktine
                 conn.Open();
                 string query = "";
 
-                //Reikia atskirt ar dėstytojas ar studentas (kurioj lentoj vyksta veiksmas)
-
-                if (Users.SelectedIndex != -1)
+                if (!IsLecturerCheckBox.IsChecked.HasValue || !IsLecturerCheckBox.IsChecked.Value)
                 {
-                    //Atnaujinamas naudotojas
-
-                    //query = "UPDATE [Praktika_moodle].[dbo].[Grade] SET StudentId = " + studentList.First(s => s.Name == StudentDropdownList.SelectedItem.ToString()).Id +
-                    //    ", LecturerSubjectId =" + subjectList.First(s => s.Name == SubjectDropdownList.SelectedItem.ToString()).Id +
-                    //    ", Grade = " + grade + " WHERE Id = " + dataTable.Rows[Grades.SelectedIndex][0];
+                    if (Users.SelectedIndex != -1 && userDataTable.Rows[Users.SelectedIndex][3].ToString() == "Ne")
+                    {
+                        query = "EXEC UpdateStudent @UserId='" + userDataTable.Rows[Users.SelectedIndex][0].ToString() +
+                            "', @Name='" + UsernameTextBox.Text.ToString().Trim() +
+                            "', @Lastname='" + LastnameTextBox.Text.ToString().Trim() +
+                            "', @Group='" + GroupTextBox.Text.ToString().Trim() + "'";
+                    }
+                    else
+                    {
+                        query = "EXEC InsertNewStudent @Name='" + UsernameTextBox.Text.ToString().Trim() +
+                            "', @Lastname='" + LastnameTextBox.Text.ToString().Trim() +
+                            "', @Group='" + GroupTextBox.Text.ToString().Trim() + "'";
+                    }
                 }
                 else
                 {
-                    //Įterpiamas naujas naudotojas
-
-                    //query = "INSERT INTO [Praktika_moodle].[dbo].[Grade] (StudentId, LecturerSubjectId, Grade) VALUES (" +
-                    //    studentList.First(s => s.Name == StudentDropdownList.SelectedItem.ToString()).Id + ", " +
-                    //    subjectList.First(s => s.Name == SubjectDropdownList.SelectedItem.ToString()).Id + ", " +
-                    //    grade + ")";
+                    if (Users.SelectedIndex != -1 && userDataTable.Rows[Users.SelectedIndex][3].ToString() == "Taip")
+                    {
+                        query = "EXEC UpdateLecturer @UserId='" + userDataTable.Rows[Users.SelectedIndex][0].ToString() +
+                            "', @Name='" + UsernameTextBox.Text.ToString().Trim() +
+                            "', @Lastname='" + LastnameTextBox.Text.ToString().Trim() + "'";
+                    }
+                    else
+                    {
+                        query = "EXEC InsertNewLecturer @Name='" + UsernameTextBox.Text.ToString().Trim() +
+                            "', @Lastname='" + LastnameTextBox.Text.ToString().Trim() + "'";
+                    }
                 }
+
+                
 
                 SqlCommand cmd = new SqlCommand(query, conn);
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    FillSubjectTable();
-                }
+                cmd.ExecuteNonQuery();
+                FillUserTable();
+                FillGroupDropdownList();
+                FillLecturerDropdownList();
 
                 conn.Close();
             }
@@ -300,37 +326,29 @@ namespace _3_praktine
         {
             if (!IsLecturerCheckBox.IsChecked.HasValue || !IsLecturerCheckBox.IsChecked.Value)
             {
-                //Reikia surasti userId Student lentoje, pagal tai ištrinti visus grades
-
                 SqlConnection conn = new SqlConnection(@"Server=.;Database=Praktika_moodle;Trusted_Connection=True;");
                 conn.Open();
 
                 string query = "DELETE FROM [Praktika_moodle].[dbo].[User] WHERE Id = " + userDataTable.Rows[Users.SelectedIndex][0];
 
                 SqlCommand cmd = new SqlCommand(query, conn);
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    FillUserTable();
-                }
+                cmd.ExecuteNonQuery();
+                FillUserTable();
 
                 conn.Close();
             }
             else
             {
-                //Reikia surasti userId Lecturer lentoje, pagal tai ištrinti visus lecturer_subject tada grades
-
                 SqlConnection conn = new SqlConnection(@"Server=.;Database=Praktika_moodle;Trusted_Connection=True;");
                 conn.Open();
 
                 string query = "DELETE FROM [Praktika_moodle].[dbo].[User] WHERE Id = " + userDataTable.Rows[Users.SelectedIndex][0];
 
                 SqlCommand cmd = new SqlCommand(query, conn);
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    FillUserTable();
-                    FillSubjectTable();
-                    FillLecturerDropdownList();
-                }
+                cmd.ExecuteNonQuery();
+                FillUserTable();
+                FillSubjectTable();
+                FillLecturerDropdownList();
 
                 conn.Close();
             }
@@ -338,18 +356,14 @@ namespace _3_praktine
 
         private void RemoveSubjectButton_Click(object sender, RoutedEventArgs e)
         {
-            //Reikia surasti visus grades ir istrint su tokiu pat id
-
             SqlConnection conn = new SqlConnection(@"Server=.;Database=Praktika_moodle;Trusted_Connection=True;");
             conn.Open();
 
             string query = "DELETE FROM [Praktika_moodle].[dbo].[Lecturer_subject] WHERE Id = " + subjectDataTable.Rows[Subjects.SelectedIndex][0];
 
             SqlCommand cmd = new SqlCommand(query, conn);
-            if (cmd.ExecuteNonQuery() > 0)
-            {
-                FillSubjectTable();
-            }
+            cmd.ExecuteNonQuery();
+            FillSubjectTable();
 
             conn.Close();
         }
@@ -366,27 +380,21 @@ namespace _3_praktine
 
                 if (Subjects.SelectedIndex != -1)
                 {
-                    //Atnaujinami duomenys
-
-                    //query = "UPDATE [Praktika_moodle].[dbo].[Grade] SET StudentId = " + studentList.First(s => s.Name == StudentDropdownList.SelectedItem.ToString()).Id +
-                    //    ", LecturerSubjectId =" + subjectList.First(s => s.Name == SubjectDropdownList.SelectedItem.ToString()).Id +
-                    //    ", Grade = " + grade + " WHERE Id = " + dataTable.Rows[Grades.SelectedIndex][0];
+                    query = "EXEC UpdateLecturerSubject @Id=" + subjectDataTable.Rows[Subjects.SelectedIndex][0] +
+                        ", @LecturerId=" + lecturerList.First(s => s.Name == LecturerDropdownList.SelectedItem.ToString()).Id +
+                        ", @GroupId=" + groupList.First(s => s.Name == GroupDropdownList.SelectedItem.ToString()).Id +
+                        ", @Subject='" + SubjectTextBox.Text.ToString().Trim() + "'";
                 }
                 else
                 {
-                    //Įterpiami duomenys
-
-                    //query = "INSERT INTO [Praktika_moodle].[dbo].[Grade] (StudentId, LecturerSubjectId, Grade) VALUES (" +
-                    //    studentList.First(s => s.Name == StudentDropdownList.SelectedItem.ToString()).Id + ", " +
-                    //    subjectList.First(s => s.Name == SubjectDropdownList.SelectedItem.ToString()).Id + ", " +
-                    //    grade + ")";
+                    query = "EXEC InsertNewLecturerSubject @LecturerId=" + lecturerList.First(s => s.Name == LecturerDropdownList.SelectedItem.ToString()).Id +
+                        ", @GroupId=" + groupList.First(s => s.Name == GroupDropdownList.SelectedItem.ToString()).Id +
+                        ", @Subject='" + SubjectTextBox.Text.ToString().Trim() + "'";
                 }
 
                 SqlCommand cmd = new SqlCommand(query, conn);
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    FillSubjectTable();
-                }
+                cmd.ExecuteNonQuery();
+                FillSubjectTable();
 
                 conn.Close();
             }

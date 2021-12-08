@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_3_praktine"
         mc:Ignorable="d"
-        Title="AdminPanel" Height="544" Width="800">
+        Title="AdminPanel" Height="566" Width="825">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="99*"/>
@@ -26,24 +26,24 @@
         <DataGrid x:Name="Subjects" Margin="265,298,61,10" SelectionChanged="Subjects_SelectionChanged" SelectionMode="Single" CanUserAddRows="False" CanUserResizeRows="False" CanUserDeleteRows="False" IsReadOnly="True" CanUserSortColumns="False" Grid.Column="1"/>
         <DataGrid x:Name="Users" Margin="66,298,458,18" SelectionChanged="Users_SelectionChanged" SelectionMode="Single" CanUserAddRows="False" CanUserResizeRows="False" CanUserDeleteRows="False" IsReadOnly="True" CanUserSortColumns="False" Grid.ColumnSpan="2"/>
         <Label Content="Naudotojo vardas" HorizontalAlignment="Left" Margin="66,110,0,0" VerticalAlignment="Top" Width="138" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="UsernameTextBox" TextWrapping="Wrap" MaxLength="2" Margin="66,141,12,369" />
         <Label Content="Naudotojo pavardė" HorizontalAlignment="Left" Margin="66,174,0,0" VerticalAlignment="Top" Width="138" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="LastnameTextBox" TextWrapping="Wrap" MaxLength="2" Margin="66,205,12,305" />
-        <CheckBox x:Name="IsLecturerCheckBox" Content="Dėstytojas" HorizontalAlignment="Left" Margin="66,249,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
-        <Button x:Name="UnselectUserButton" Content="Atžymėti" Click="Button_Click_1" Margin="151,367,400,141" Grid.Column="1"/>
-        <Button x:Name="RemoveUserButton" Content="Ištrinti" Click="RemoveUserButton_Click" Margin="163,257,579,236" Grid.ColumnSpan="2"/>
-        <Button x:Name="SaveUserButton" Content="Išsaugoti" Click="Button_Click_2" RenderTransformOrigin="0.175,-0.347" Margin="43,270,508,238" Grid.Column="1"/>
+        <CheckBox x:Name="IsLecturerCheckBox" Content="Dėstytojas" HorizontalAlignment="Left" Margin="66,249,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
         <Label Content="Grupė" HorizontalAlignment="Left" Margin="34,143,0,0" VerticalAlignment="Top" Width="138" Grid.Column="1"/>
-        <TextBox x:Name="GroupTextBox" TextWrapping="Wrap" MaxLength="2" Margin="34,174,448,336" Grid.Column="1" />
+        <TextBox x:Name="GroupTextBox" TextWrapping="Wrap" MaxLength="50" Margin="34,174,448,336" Grid.Column="1" />
         <Label Content="Grupė" HorizontalAlignment="Left" Margin="241,84,0,0" VerticalAlignment="Top" Width="81" Grid.Column="1"/>
         <ComboBox x:Name="GroupDropdownList" HorizontalAlignment="Left" Margin="241,117,0,0" VerticalAlignment="Top" Width="167" Height="26" Grid.Column="1"/>
         <Label Content="Dėstytojas" HorizontalAlignment="Left" Margin="241,156,0,0" VerticalAlignment="Top" Grid.Column="1"/>
         <ComboBox x:Name="LecturerDropdownList" HorizontalAlignment="Left" Margin="241,187,0,0" VerticalAlignment="Top" Width="167" Height="26" Grid.Column="1"/>
         <Label Content="Dalykas" Margin="241,220,306,282" Grid.Column="1"/>
-        <TextBox x:Name="SubjectTextBox" TextWrapping="Wrap" MaxLength="2" Margin="241,249,241,261" Grid.Column="1" />
+        <TextBox x:Name="SubjectTextBox" TextWrapping="Wrap" MaxLength="50" Margin="241,249,241,261" Grid.Column="1" />
         <Button x:Name="RemoveSubjectButton" Content="Ištrinti" Click="RemoveSubjectButton_Click" Margin="392,252,152,241" Grid.Column="1"/>
         <Button x:Name="SaveSubjectButton" Content="Išsaugoti" Click="SaveButton_Click_2" RenderTransformOrigin="0.175,-0.347" Margin="490,270,61,238" Grid.Column="1"/>
-        <Button x:Name="UnselectSubjectButton" Content="Atžymėti" Click="UnselectButton_Click_1" Margin="546,357,5,151" Grid.Column="1"/>
+        <Button x:Name="UnselectSubjectButton" Content="Atžymėti" Click="UnselectButton_Click_1" Margin="565,357,5,151" Grid.Column="1"/>
+        <TextBox x:Name="LastnameTextBox" TextWrapping="Wrap" MaxLength="50" Margin="66,205,12,305" />
+        <TextBox x:Name="UsernameTextBox" TextWrapping="Wrap" MaxLength="50" Margin="66,141,0,369" HorizontalAlignment="Left" Width="120" />
+        <Button x:Name="RemoveUserButton" Content="Ištrinti" Click="RemoveUserButton_Click" Margin="163,257,579,236" Grid.ColumnSpan="2"/>
+        <Button x:Name="SaveUserButton" Content="Išsaugoti" Click="Button_Click_2" RenderTransformOrigin="0.175,-0.347" Margin="43,270,508,238" Grid.Column="1"/>
+        <Button x:Name="UnselectUserButton" Content="Atžymėti" Click="Button_Click_1" Margin="168,373,383,135" Grid.Column="1"/>
 
     </Grid>
 </Window>
